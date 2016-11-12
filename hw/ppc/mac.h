@@ -28,6 +28,7 @@
 
 #include "qemu/units.h"
 #include "exec/memory.h"
+#include "audio/audio.h"
 #include "hw/boards.h"
 #include "hw/sysbus.h"
 #include "hw/input/adb.h"
@@ -93,6 +94,8 @@ struct ScreamerState {
     /*< public >*/
     MemoryRegion mem;
     qemu_irq irq;
+
+    QEMUSoundCard card;
 };
 
 /* Grackle PCI */
