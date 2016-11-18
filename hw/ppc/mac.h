@@ -57,6 +57,7 @@
 #define OLDWORLD_IDE1_DMA_IRQ  0x3
 #define OLDWORLD_SCREAMER_TX_IRQ  0x11
 #define OLDWORLD_SCREAMER_TX_DMA_IRQ 0x08
+#define OLDWORLD_SCREAMER_RX_IRQ  0x09
 
 /* New World IRQs */
 #define NEWWORLD_CUDA_IRQ      0x19
@@ -71,6 +72,7 @@
 #define NEWWORLD_EXTING_GPIO9  0x37
 #define NEWWORLD_SCREAMER_IRQ  0x18
 #define NEWWORLD_SCREAMER_DMA_IRQ 0x09
+#define NEWWORLD_SCREAMER_RX_IRQ 0x0a
 
 /* Core99 machine */
 #define TYPE_CORE99_MACHINE MACHINE_TYPE_NAME("mac99")
@@ -104,6 +106,7 @@ struct ScreamerState {
     qemu_irq irq;
     void *dbdma;
     qemu_irq dma_tx_irq;
+    qemu_irq dma_rx_irq;
 
     QEMUSoundCard card;
     SWVoiceOut *voice;
@@ -114,10 +117,10 @@ struct ScreamerState {
     DBDMA_io io;
 
     uint32_t regs[6];
-    uint32_t codec_ctrl_regs[7];
+    uint32_t codec_ctrl_regs[8];
 };
 
-void macio_screamer_register_dma(ScreamerState *s, void *dbdma, int txchannel);
+void macio_screamer_register_dma(ScreamerState *s, void *dbdma, int txchannel, int rxchannel);
 
 /* Grackle PCI */
 #define TYPE_GRACKLE_PCI_HOST_BRIDGE "grackle-pcihost"
